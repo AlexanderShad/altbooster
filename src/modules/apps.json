@@ -90,7 +90,7 @@
               ]
             },
             {
-              "label": "EPM install",
+              "label": "EPM",
               "cmd": [
                 "epm",
                 "-i",
@@ -123,7 +123,7 @@
               ]
             },
             {
-              "label": "EPM install",
+              "label": "EPM",
               "cmd": [
                 "epm",
                 "-i",
@@ -141,7 +141,7 @@
           "label": "FreeRDP",
           "desc": "RDP-клиент с нативной поддержкой Wayland (wlfreerdp)",
           "source": {
-            "label": "EPM install",
+            "label": "EPM",
             "cmd": [
               "epm",
               "-i",
@@ -198,7 +198,7 @@
               ]
             },
             {
-              "label": "EPM install",
+              "label": "EPM",
               "cmd": [
                 "epm",
                 "-i",
@@ -263,7 +263,7 @@
               ]
             },
             {
-              "label": "EPM install",
+              "label": "EPM",
               "cmd": [
                 "epm",
                 "-i",
@@ -337,6 +337,44 @@
               "cups-browsed"
             ]
           }
+        },
+        {
+          "id": "foliate",
+          "label": "Foliate",
+          "desc": "Читалка книг",
+          "source": {
+            "label": "Flathub",
+            "cmd": [
+              "flatpak",
+              "install",
+              "-y",
+              "flathub",
+              "com.github.johnfactotum.Foliate"
+            ],
+            "check": [
+              "flatpak",
+              "com.github.johnfactotum.Foliate"
+            ]
+          }
+        },
+        {
+          "id": "calibre",
+          "label": "Calibre",
+          "desc": "Управление библиотекой книг",
+          "source": {
+            "label": "Flathub",
+            "cmd": [
+              "flatpak",
+              "install",
+              "-y",
+              "flathub",
+              "com.calibre_ebook.calibre"
+            ],
+            "check": [
+              "flatpak",
+              "com.calibre_ebook.calibre"
+            ]
+          }
         }
       ]
     },
@@ -403,7 +441,7 @@
               ]
             },
             {
-              "label": "EPM install",
+              "label": "EPM",
               "cmd": [
                 "epm",
                 "-i",
@@ -435,6 +473,69 @@
             ]
           }
         },
+        {
+          "id": "gradia",
+          "label": "Gradia",
+          "desc": "Аннотирование и оформление скриншотов (GTK4)",
+          "source": {
+            "label": "Flathub",
+            "cmd": [
+              "flatpak",
+              "install",
+              "-y",
+              "flathub",
+              "be.alexandervanhee.gradia"
+            ],
+            "check": [
+              "flatpak",
+              "be.alexandervanhee.gradia"
+            ]
+          }
+        },
+        {
+          "id": "parabolic",
+          "label": "Parabolic",
+          "desc": "Загрузчик видео (YouTube и др.)",
+          "source": {
+            "label": "Flathub",
+            "cmd": [
+              "flatpak",
+              "install",
+              "-y",
+              "flathub",
+              "org.nickvision.tubeconverter"
+            ],
+            "check": [
+              "flatpak",
+              "org.nickvision.tubeconverter"
+            ]
+          }
+        },
+        {
+          "id": "spotify",
+          "label": "Spotify",
+          "desc": "Музыкальный стриминг",
+          "source": {
+            "label": "Flathub",
+            "cmd": [
+              "flatpak",
+              "install",
+              "-y",
+              "flathub",
+              "com.spotify.Client"
+            ],
+            "check": [
+              "flatpak",
+              "com.spotify.Client"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "редакторы",
+      "title": "Редакторы",
+      "items": [
         {
           "id": "krita",
           "label": "Krita",
@@ -474,28 +575,125 @@
           }
         },
         {
-          "id": "gradia",
-          "label": "Gradia",
-          "desc": "Аннотирование и оформление скриншотов (GTK4)",
+          "id": "gimp",
+          "label": "GIMP",
+          "desc": "Растровый графический редактор",
+          "sources": [
+            {
+              "label": "Flathub",
+              "cmd": [
+                "flatpak",
+                "install",
+                "-y",
+                "flathub",
+                "org.gimp.GIMP"
+              ],
+              "check": [
+                "flatpak",
+                "org.gimp.GIMP"
+              ]
+            },
+            {
+              "label": "EPM",
+              "cmd": [
+                "epm",
+                "-i",
+                "gimp"
+              ],
+              "check": [
+                "rpm",
+                "gimp"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "photogimp",
+          "label": "PhotoGIMP",
+          "desc": "Конфигурация GIMP в стиле Photoshop",
           "source": {
-            "label": "Flathub",
+            "label": "GitHub",
             "cmd": [
-              "flatpak",
-              "install",
-              "-y",
-              "flathub",
-              "be.alexandervanhee.gradia"
+              "bash",
+              "-c",
+              "set -e; REAL_USER=${SUDO_USER:-$USER}; HOME_DIR=$(getent passwd $REAL_USER | cut -d: -f6); TMP=$(mktemp -d); sudo -u $REAL_USER git clone --depth=1 https://github.com/Diolinux/PhotoGIMP.git \"$TMP/PhotoGIMP\"; SRC=\"$TMP/PhotoGIMP/.config/GIMP/3.0\"; for GIMP_DIR in \"$HOME_DIR/.var/app/org.gimp.GIMP/config/GIMP/3.0\" \"$HOME_DIR/.config/GIMP/3.0\"; do sudo -u $REAL_USER mkdir -p \"$GIMP_DIR\" && sudo -u $REAL_USER cp -r \"$SRC/.\" \"$GIMP_DIR/\"; done; sudo -u $REAL_USER touch \"$HOME_DIR/.config/photogimp-installed\"; rm -rf \"$TMP\""
             ],
             "check": [
-              "flatpak",
-              "be.alexandervanhee.gradia"
+              "path",
+              "~/.config/photogimp-installed"
             ]
           }
         },
         {
-          "id": "spotify",
-          "label": "Spotify",
-          "desc": "Музыкальный стриминг",
+          "id": "darktable",
+          "label": "Darktable",
+          "desc": "Обработка RAW-фотографий",
+          "sources": [
+            {
+              "label": "Flathub",
+              "cmd": [
+                "flatpak",
+                "install",
+                "-y",
+                "flathub",
+                "org.darktable.Darktable"
+              ],
+              "check": [
+                "flatpak",
+                "org.darktable.Darktable"
+              ]
+            },
+            {
+              "label": "EPM",
+              "cmd": [
+                "epm",
+                "-i",
+                "darktable"
+              ],
+              "check": [
+                "rpm",
+                "darktable"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "rawtherapee",
+          "label": "RawTherapee",
+          "desc": "Обработка RAW-фотографий с расширенными настройками",
+          "sources": [
+            {
+              "label": "Flathub",
+              "cmd": [
+                "flatpak",
+                "install",
+                "-y",
+                "flathub",
+                "com.rawtherapee.RawTherapee"
+              ],
+              "check": [
+                "flatpak",
+                "com.rawtherapee.RawTherapee"
+              ]
+            },
+            {
+              "label": "EPM",
+              "cmd": [
+                "epm",
+                "-i",
+                "rawtherapee"
+              ],
+              "check": [
+                "rpm",
+                "rawtherapee"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "color_picker",
+          "label": "Color Picker",
+          "desc": "Выбор и определение цвета с экрана",
           "source": {
             "label": "Flathub",
             "cmd": [
@@ -503,19 +701,19 @@
               "install",
               "-y",
               "flathub",
-              "com.spotify.Client"
+              "nl.hjdskes.gcolor3"
             ],
             "check": [
               "flatpak",
-              "com.spotify.Client"
+              "nl.hjdskes.gcolor3"
             ]
           }
         }
       ]
     },
     {
-      "id": "утилиты",
-      "title": "Утилиты",
+      "id": "системные_инструменты",
+      "title": "Системные инструменты",
       "items": [
         {
           "id": "extension_manager",
@@ -569,63 +767,6 @@
             "check": [
               "flatpak",
               "com.bitwarden.desktop"
-            ]
-          }
-        },
-        {
-          "id": "foliate",
-          "label": "Foliate",
-          "desc": "Читалка книг",
-          "source": {
-            "label": "Flathub",
-            "cmd": [
-              "flatpak",
-              "install",
-              "-y",
-              "flathub",
-              "com.github.johnfactotum.Foliate"
-            ],
-            "check": [
-              "flatpak",
-              "com.github.johnfactotum.Foliate"
-            ]
-          }
-        },
-        {
-          "id": "calibre",
-          "label": "Calibre",
-          "desc": "Управление библиотекой книг",
-          "source": {
-            "label": "Flathub",
-            "cmd": [
-              "flatpak",
-              "install",
-              "-y",
-              "flathub",
-              "com.calibre_ebook.calibre"
-            ],
-            "check": [
-              "flatpak",
-              "com.calibre_ebook.calibre"
-            ]
-          }
-        },
-        {
-          "id": "parabolic",
-          "label": "Parabolic",
-          "desc": "Загрузчик видео (YouTube и др.)",
-          "source": {
-            "label": "Flathub",
-            "cmd": [
-              "flatpak",
-              "install",
-              "-y",
-              "flathub",
-              "org.nickvision.tubeconverter"
-            ],
-            "check": [
-              "flatpak",
-              "org.nickvision.tubeconverter"
             ]
           }
         },
@@ -704,7 +845,13 @@
               "com.github.tchx84.Flatseal"
             ]
           }
-        },
+        }
+      ]
+    },
+    {
+      "id": "устройства_и_сеть",
+      "title": "Устройства и сеть",
+      "items": [
         {
           "id": "solaar",
           "label": "Solaar",
@@ -872,6 +1019,25 @@
             "check": [
               "which",
               "occt"
+            ]
+          }
+        },
+        {
+          "id": "gtkstresstesting",
+          "label": "GtkStressTesting",
+          "desc": "Стресс-тест GTK и системных компонентов",
+          "source": {
+            "label": "Flathub",
+            "cmd": [
+              "flatpak",
+              "install",
+              "-y",
+              "flathub",
+              "com.leinardi.gst"
+            ],
+            "check": [
+              "flatpak",
+              "com.leinardi.gst"
             ]
           }
         }
